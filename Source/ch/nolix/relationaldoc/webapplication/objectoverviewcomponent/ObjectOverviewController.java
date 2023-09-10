@@ -1,6 +1,5 @@
 package ch.nolix.relationaldoc.webapplication.objectoverviewcomponent;
 
-import ch.nolix.core.container.immutablelist.ImmutableList;
 import ch.nolix.core.language.GlobalEnglishNounHelper;
 import ch.nolix.core.programatom.name.PluralPascalCaseCatalogue;
 import ch.nolix.coreapi.containerapi.baseapi.IContainer;
@@ -43,7 +42,13 @@ final class ObjectOverviewController extends Controller<IRelationalDocContext> {
 			return baseObject.getStoredDirectSubTypes();
 		}
 		
-		return new ImmutableList<>();
+		return getStoredObjectsWhenDoesNotHaveBaseObject();
+	}
+	
+	private IContainer<? extends IAbstractableObject> getStoredObjectsWhenDoesNotHaveBaseObject() {
+		try (final var dataAdapter = getStoredApplicationContext().createDataAdapter()) {
+			return dataAdapter.getStoredTopLevelObjects();
+		}
 	}
 	
 	private boolean hasBaseObject() {
