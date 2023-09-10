@@ -9,7 +9,7 @@ import ch.nolix.techapi.relationaldocapi.dataaapterapi.IDataAdapter;
 
 public final class RelationalDocContext implements IRelationalDocContext {
 	
-	public static RelationalDocContext withDataAdapter(IDataAdapter dataAdapter) {
+	public static RelationalDocContext withDataAdapter(final IDataAdapter dataAdapter) {
 		return new RelationalDocContext(dataAdapter);
 	}
 	
@@ -19,7 +19,7 @@ public final class RelationalDocContext implements IRelationalDocContext {
 		
 		GlobalValidator.assertThat(dataAdapter).thatIsNamed(IDataAdapter.class).isNotNull();
 		
-		this.dataAdapter = dataAdapter;
+		this.dataAdapter =dataAdapter;
 	}
 	
 	@Override
